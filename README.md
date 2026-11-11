@@ -6,7 +6,7 @@
 
 **See what your developer tools left on disk, and clear only what you choose.**
 
-[![release](https://img.shields.io/github/v/release/Zeatrex01/cachesweep?style=flat-square)](../../releases)
+[![release](https://img.shields.io/github/v/release/Zeatrex01/cachesweeper?style=flat-square)](../../releases)
 [![license](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
 [Turkish](docs/tr/README.tr.md) · [Documentation](DOCUMENTATION.md) · [Security](SECURITY.md)

@@ -42,7 +42,7 @@ namespace CacheSweep
         public const string Version   = "0.9.0";
         public const string Developer = "Enes Aksu";
         public const string Handle    = "";                       // optional, e.g. "@name"
-        public const string GitHub    = "https://github.com/Zeatrex01/cachesweep";
+        public const string GitHub    = "https://github.com/Zeatrex01/cachesweeper";
         public const string License   = "MIT";
         public const string Year      = "2026";
     }

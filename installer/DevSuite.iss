@@ -5,7 +5,7 @@
 #endif
 #define AppName   "DevSuite"
 #define Publisher "Enes Aksu"
-#define SiteUrl   "https://github.com/Zeatrex01/cachesweep"
+#define SiteUrl   "https://github.com/Zeatrex01/cachesweeper"
 
 [Setup]
 AppId={{7C3E5A92-41B6-4D0F-9E28-6A1F0D3B7C54}
