@@ -1,0 +1,25 @@
+# build output
+dist/
+dist-tr/
+dist-extras/
+dist-installer/
+out/
+*.exe
+*.pdb
+*.zip
+
+# backups and temporary files
+*.bak
+*.log
+*.tmp
+*.download
+
+# operating system
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# editors
+.vs/
+.vscode/
+*.user

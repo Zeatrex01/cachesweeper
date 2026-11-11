@@ -1,0 +1,8 @@
+{
+  "name":  "Skill Manager",
+  "en":    "Lists installed skills, toggles them, edits SKILL.md and flags the ones bloating your context.",
+  "color": "#F59E0B",
+  "glyph": "K",
+  "sources": [ "extras/SkillManager/SkillManager.cs", "shared/Tokens.cs", "shared/Native.cs", "shared/Ui.cs", "extras/shared/Skills.cs" ],
+  "references": []
+}

@@ -1,0 +1,8 @@
+{
+  "name":  "MCP Control",
+  "en":    "Lists MCP servers across Claude, Codex and ChatGPT; switches each on or off without deleting it.",
+  "color": "#22C55E",
+  "glyph": "M",
+  "sources": [ "extras/McpControl/McpControl.cs", "shared/Tokens.cs", "shared/Native.cs", "shared/Ui.cs", "extras/shared/Mcp.cs" ],
+  "references": [ "System.Web.Extensions.dll" ]
+}

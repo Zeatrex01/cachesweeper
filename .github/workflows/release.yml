@@ -1,0 +1,58 @@
+# A version tag builds the Hub and CacheSweep, tests them, and creates a DRAFT release for review.
+# Nothing is published until a person presses Publish on GitHub.
+name: release
+on:
+  push:
+    tags: ['v[0-9]+.[0-9]+.[0-9]+']
+permissions: {}
+jobs:
+  release:
+    runs-on: windows-2025
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build
+        shell: powershell
+        run: tools\build.ps1
+      - name: Tests
+        shell: powershell
+        run: |
+          tests\GuardTests.ps1
+          if ($LASTEXITCODE -ne 0) { throw 'Guard tests failed' }
+          tests\HubTests.ps1
+          if ($LASTEXITCODE -ne 0) { throw 'Hub tests failed' }
+          tests\MemoryTests.ps1
+          if ($LASTEXITCODE -ne 0) { throw 'Scan memory tests failed' }
+      - name: Package
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $ver = $env:GITHUB_REF_NAME.TrimStart('v')
+          foreach ($exe in Get-ChildItem dist\*.exe) {
+            $file = $exe.VersionInfo.FileVersion
+            if ($file -notlike "$ver*") { throw "$($exe.Name) is version '$file', the tag says $ver" }
+          }
+
+          New-Item -ItemType Directory -Force out | Out-Null
+          Compress-Archive -Path dist\*.exe, LICENSE, README.md -DestinationPath "out\DevSuite-$ver-portable.zip"
+          Compress-Archive -Path dist-tr\*.exe, dist-tr\lang.json, LICENSE, README.md -DestinationPath "out\DevSuite-$ver-portable-tr.zip"
+
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { throw 'ISCC.exe not found' }
+          & $iscc "/DAppVer=$ver" "/O$PWD\out" installer\DevSuite.iss
+          if ($LASTEXITCODE -ne 0) { throw 'ISCC failed' }
+
+          $sums = Get-ChildItem out -File | Sort-Object Name | ForEach-Object {
+            '{0}  {1}' -f (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant(), $_.Name }
+          [IO.File]::WriteAllText("$PWD\out\SHA256SUMS.txt", (($sums -join "`n") + "`n"), (New-Object Text.UTF8Encoding($false)))
+      - name: Create draft release
+        shell: powershell
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create $env:GITHUB_REF_NAME (Get-ChildItem out -File).FullName --draft --verify-tag --generate-notes
+          if ($LASTEXITCODE -ne 0) { throw 'gh release failed' }

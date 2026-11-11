@@ -1,0 +1,27 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build-and-test:
+    runs-on: windows-2025
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build everything, including the experimental tools
+        shell: powershell
+        run: tools\build.ps1 -Extras
+      - name: Guard and sweeper tests
+        shell: powershell
+        run: tests\GuardTests.ps1
+      - name: Hub tests
+        shell: powershell
+        run: tests\HubTests.ps1
+      - name: Scan memory tests
+        shell: powershell
+        run: tests\MemoryTests.ps1

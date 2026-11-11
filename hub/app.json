@@ -1,0 +1,8 @@
+{
+  "name":  "DevSuite Hub",
+  "en":    "The screen that opens first: starts the modules next to it, and nothing else.",
+  "color": "#64748B",
+  "glyph": "H",
+  "sources": [ "hub/Hub.cs", "shared/Logo.cs", "shared/Tokens.cs", "shared/Native.cs", "shared/Ui.cs" ],
+  "references": []
+}

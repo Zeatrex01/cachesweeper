@@ -1,0 +1,9 @@
+{
+  "name":  "CacheSweep",
+  "en":    "Finds, measures and clears the caches piled up by Node, Python, Unity and Android toolchains.",
+  "color": "#3B82F6",
+  "glyph": "C",
+  "sources": [ "apps/CacheSweep/CacheSweep.cs", "apps/CacheSweep/Targets.cs", "apps/CacheSweep/Sweeper.cs", "apps/CacheSweep/ScanMemory.cs",
+               "apps/CacheSweep/RunningTools.cs", "apps/CacheSweep/ConfirmWindow.cs", "apps/CacheSweep/Widgets.cs", "apps/CacheSweep/MiniWindow.cs", "shared/Logo.cs", "shared/Tokens.cs", "shared/Native.cs" ],
+  "references": [ "Microsoft.VisualBasic.dll", "System.Management.dll" ]
+}

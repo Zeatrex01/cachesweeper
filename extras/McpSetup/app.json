@@ -1,0 +1,8 @@
+{
+  "name":  "MCP Setup",
+  "en":    "Adds a new MCP server: templates, a command test run, and one-shot writing to several clients.",
+  "color": "#A855F7",
+  "glyph": "S",
+  "sources": [ "extras/McpSetup/McpSetup.cs", "shared/Tokens.cs", "shared/Native.cs", "shared/Ui.cs", "extras/shared/Mcp.cs" ],
+  "references": [ "System.Web.Extensions.dll" ]
+}
